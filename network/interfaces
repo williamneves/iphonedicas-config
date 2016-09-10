@@ -1,0 +1,14 @@
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+        address 158.69.211.246
+        netmask 255.255.255.255
+        post-up /sbin/ip route add 158.69.192.1 dev eth0
+        post-up /sbin/ip route add default via 158.69.192.1
+        pre-down /sbin/ip route del default via 158.69.192.1
+        pre-down /sbin/ip route del 158.69.192.1 dev eth0
+	dns-nameserver 213.186.33.99
+        dns-search vps.ovh.ca
